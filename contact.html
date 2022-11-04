@@ -125,19 +125,19 @@ Author URL: http://w3layouts.com
                 <div class="map-content-9">
                     <form id="submit-form" action="">
                         <div class="twice-two">
-                            <input type="text" class="form-control" name="w3lName" id="w3lName" placeholder="Name"
+                            <input type="text" class="form-control" name="Name" id="Name" placeholder="Name"
                                 required="">
-                            <input type="email" class="form-control" name="w3lSender" id="w3lSender" placeholder="Email"
+                            <input type="email" class="form-control" name="Sender" id="Sender" placeholder="Email"
                                 required="">
                         </div>
                         <div class="twice">
-                            <input type="text" class="form-control" name="w3lSubject" id="w3lSubject"
+                            <input type="text" class="form-control" name="Subject" id="Subject"
                                 placeholder="Subject" required="">
                         </div>
-                        <textarea name="w3lMessage" class="form-control" id="w3lMessage" placeholder="Message"
+                        <textarea name="w3lMessage" class="form-control" id="Message" placeholder="Message"
                             required=""></textarea>
                         <div class="text-right">
-                            <button type="submit" class="btn btn-primary btn-style mt-4">Send Message</button>
+                            <button type="submit" class="btn btn-primary btn-style mt-4" value="sumbit">Send Message</button>
                         </div>
                     </form>
                 </div>
@@ -170,25 +170,7 @@ Author URL: http://w3layouts.com
   <button onclick="topFunction()" id="movetop" title="Go to top">
     <span class="fa fa-angle-up"></span>
   </button>
-  <script>
-    $("#submit-form").submit((e)=>{
-        e.preventDefault()
-        $.ajax({
-            url:"https://script.google.com/macros/s/AKfycbzFtXYvI-fYZjvaUQq5P17o6uNGb1tD9PPJ7wqXuphW7D1_oWxly_WYouOlnJsOCOBw9w/exec",
-            data:$("#submit-form").serialize(),
-            method:"post",
-            success:function (response){
-                alert("Form submitted successfully")
-                window.location.reload()
-                //window.location.href="https://google.com"
-            },
-            error:function (err){
-                alert("Something Error")
-
-            }
-        })
-    })
-</script>
+  
   <script>
     // When the user scrolls down 20px from the top of the document, show the button
     window.onscroll = function () {
@@ -409,10 +391,22 @@ Author URL: http://w3layouts.com
     });
   });
 </script>
+
 <!--//MENU-JS-->
 
 <!-- bootstrap js -->
-<script src="assets/js/bootstrap.min.js"></script>
+<script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbwZJmSiI7uh10v4i7-20UBtskMB4JUJ6INLeM9S9YZl4zQndng7BcAYK1gzRrOkrQTCZA/exec';
+  const form = document.forms['submit-form']
+  
+  form.addEventListener('submit', e => {
+    e.preventDefault()
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+    .then(response => alert("Thank you! your form is submitted successfully." ))
+    .then(() => {  window.location.reload(); })
+    .catch(error => console.error('Error!', error.message))
+  })
+  </script>
 
 </body>
 
