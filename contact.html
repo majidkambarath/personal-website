@@ -14,6 +14,7 @@
   <!-- Template CSS -->
   <link rel="stylesheet" href="assets/css/style-starter.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/js/all.min.js" crossorigin="anonymous"></script> -->
 </head>
 
 <body>
@@ -114,26 +115,28 @@
                         </div>
                         <div class="cont-right">
                             <h6>Location</h6>
-                            <p>Address here, Malappuram Town, kodur (676504).</p>
+                            <p> Malappuram Town, kodur (676504).</p>
                         </div>
                     </div>
                 </div>
                 <div class="map-content-9">
-                    <form id="submit-form" action="">
+                    <form id="submit-form" action="" >
                         <div class="twice-two">
-                            <input type="text" class="form-control" name="Name" id="Name" placeholder="Name"
-                                required="">
-                            <input type="email" class="form-control" name="Sender" id="Sender" placeholder="Email"
-                                required="">
+                            <input type="text" class="form-control" name="Name" id="Name" onkeyup="validateName()" placeholder="Name">
+                             <span id="Name-error"> </span>
+                          
+                            <input type="email" class="form-control" name="Email" id="Email" onkeyup="validateEmail()" placeholder="Email" required="" >
+                            <span id="Email-error"> </span>
                         </div>
                         <div class="twice">
-                            <input type="text" class="form-control" name="Subject" id="Subject"
-                                placeholder="Subject" required="">
+                            <input type="text" class="form-control" name="Subject" id="Subject" placeholder="Subject">
+                            <span id="Subject-error"> </span>
                         </div>
-                        <textarea name="w3lMessage" class="form-control" id="Message" placeholder="Message"
-                            required=""></textarea>
+                        <textarea name="w3lMessage" class="form-control" id="Message" placeholder="Message" ></textarea>
+                        <span id="Message-error"> </span>
                         <div class="text-right">
                             <button type="submit" class="btn btn-primary btn-style mt-4" value="sumbit">Send Message</button>
+                           
                         </div>
                     </form>
                 </div>
@@ -403,7 +406,53 @@
     .catch(error => console.error('Error!', error.message))
   })
   </script>
+<!-- <script>
+  function validate(){
+    var email=document.getElementById("Sender");
+    var reg = /^([a-z A-Z 0-9\._]+)@([a-z A-Z 0-9])+.([a-z]+)(.[a-z]+)?$/;
+    var result=reg.test(Sender);
+    if(result==false){
+      alert("sorry invalid Email ID");
+      document.submit-form.Sender.focus();
+      return false;
+    }
+    return true;
+  }
+</script> -->
+<script >
+  var NameError = document.getElementById('Name-error');
+  var EmailError = document.getElementById('Email-error');
+  // var SubjectError = document.getElementById('Subject-error');
+  // var MessageError = document.getElementById('Message-error');
+  function validateName(){
+    var Name = document.getElementById('Name').value;
+    if (Name.length==0){
+      NameError.innerHTML ='Name is required'
+      return false;
+    }
+    if(!Name.match(/^[A-Za-z]*\s{1}[A-Za-z]*$/)){
+      NameError.innerHTML ='write full name'
+      return false;
+    }
+    NameError.innerHTML ='<i class="fa-sharp fa-solid fa-circle-check"></i>';
+    return true;
+  }
+     function validateEmail(){
+    var Email = document.getElementById('Email').value;
+     
+    if (Email.length==0){
+      EmailError.innerHTML = 'Email ID is required'
+      return false;
+    }
+    if(!Email.match(/^[A-Za-z\._\-[0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/)){
+      EmailError.innerHTML = 'Email Invalid'
+      return false;
+    }
+    EmailError.innerHTML = '<i class="fa-sharp fa-solid fa-circle-check"></i>';
+      return true;
+  }
 
+</script>
 </body>
 
 </html>

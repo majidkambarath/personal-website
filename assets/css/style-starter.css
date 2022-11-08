@@ -1540,7 +1540,15 @@ select.form-control[size], select.form-control[multiple] {
 
 textarea.form-control {
   height: auto; }
+/* .map-content-9 span{
+  position: absolute;
+  bottom: 12px; 
+  right: 17px;
+  font-size: 14px;
+  color: red;
 
+
+} */
 .form-group {
   margin-bottom: 1rem; }
 
